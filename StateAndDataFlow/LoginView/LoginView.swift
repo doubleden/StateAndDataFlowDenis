@@ -11,13 +11,24 @@ struct LoginView: View {
     @EnvironmentObject private var loginViewVM: LoginViewViewModel
     
     var body: some View {
-        VStack {
-            TextField("Enter your name", text: $loginViewVM.name)
-                .multilineTextAlignment(.center)
+        VStack(spacing: 10) {
+            HStack(spacing: 10) {
+                TextField("Enter your name...", text: $loginViewVM.name)
+                    .multilineTextAlignment(.center)
+                    .onChange(of: loginViewVM.name) { _, newValue in
+                        loginViewVM.countLetters()
+                    }
+                    
+                Text(loginViewVM.counter.formatted())
+                    .foregroundStyle(loginViewVM.isNameValid ? .green : .red)
+            }
+            
             Button(action: login) {
                 Label("OK", systemImage: "checkmark.circle")
             }
+            .disabled(loginViewVM.isNameValid ? false : true)
         }
+        .padding()
     }
     
     private func login() {

@@ -8,6 +8,21 @@
 import Foundation
 
 final class LoginViewViewModel: ObservableObject {
-    var name = ""
+    @Published var name = ""
+    @Published var counter = 0
     @Published var isLoggedIn = false
+    @Published var isNameValid = false
+    
+    func countLetters() {
+        counter = name.count
+        validateName()
+    }
+    
+    private func validateName() {
+        if name.count >= 3 {
+            isNameValid = true
+        } else {
+            isNameValid = false
+        }
+    }
 }
