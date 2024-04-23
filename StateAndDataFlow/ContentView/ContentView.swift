@@ -63,37 +63,13 @@ struct logoutButtonView: View {
     }
 }
 
-struct FontViewModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.title)
-            .fontWeight(.bold)
-            .foregroundStyle(.white)
-    }
-}
-
-extension Text {
+private extension Text {
     func buttonFont() -> some View {
         modifier(FontViewModifier())
     }
 }
 
-struct BorderedViewModifier: ViewModifier {
-    let color: Color
-    
-    func body(content: Content) -> some View {
-        content
-            .frame(width: 200, height: 60)
-            .background(color)
-            .clipShape(.rect(cornerRadius: 20))
-            .overlay (
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(.black, lineWidth: 4)
-            )
-    }
-}
-
-extension Button {
+private extension Button {
     func bordered(background: Color) -> some View {
         modifier(BorderedViewModifier(color: background))
     }
