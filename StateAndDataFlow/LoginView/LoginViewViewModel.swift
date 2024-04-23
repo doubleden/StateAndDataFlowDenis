@@ -13,6 +13,16 @@ final class LoginViewViewModel: ObservableObject {
     @Published var isLoggedIn = false
     @Published var isNameValid = false
     
+    func login() {
+        isLoggedIn.toggle()
+    }
+    
+    func logout() {
+        name = ""
+        countLetters()
+        isLoggedIn.toggle()
+    }
+    
     func countLetters() {
         counter = name.count
         validateName()

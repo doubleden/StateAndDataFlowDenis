@@ -23,9 +23,11 @@ struct ContentView: View {
                 
             Spacer()
             
-            startButtonView(contentViewVM: contentViewVM)
+            startButtonView()
             
             Spacer()
+            
+            logoutButtonView()
         }
         .padding()
     }
@@ -38,7 +40,7 @@ struct ContentView: View {
 }
 
 struct startButtonView: View {
-    @Bindable var contentViewVM: ContentViewViewModel
+    @Environment(ContentViewViewModel.self) private var contentViewVM
     
     var body: some View {
         Button(action: contentViewVM.startTimer) {
@@ -46,6 +48,18 @@ struct startButtonView: View {
                 .buttonFont()
         }
         .bordered(background: .red)
+    }
+}
+
+struct logoutButtonView: View {
+    @EnvironmentObject private var loginViewVM: LoginViewViewModel
+    
+    var body: some View {
+        Button(action: loginViewVM.logout, label: {
+            Text("LogOut")
+                .buttonFont()
+        })
+        .bordered(background: .blue)
     }
 }
 
