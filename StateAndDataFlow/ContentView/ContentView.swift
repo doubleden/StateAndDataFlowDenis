@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(ContentViewViewModel.self) private var contentViewVM
     @EnvironmentObject private var loginViewVM: LoginViewViewModel
-    
+
     var body: some View {
         VStack {
             Text("Hi, \(loginViewVM.name)")
@@ -55,11 +55,17 @@ struct logoutButtonView: View {
     @EnvironmentObject private var loginViewVM: LoginViewViewModel
     
     var body: some View {
-        Button(action: loginViewVM.logout, label: {
+        Button(action: logout, label: {
             Text("LogOut")
                 .buttonFont()
         })
         .bordered(background: .blue)
+    }
+    
+    private func logout() {
+        loginViewVM.name = ""
+        loginViewVM.countLetters()
+        loginViewVM.isLoggedIn.toggle()
     }
 }
 
