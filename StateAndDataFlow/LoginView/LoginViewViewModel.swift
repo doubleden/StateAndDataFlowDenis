@@ -5,10 +5,9 @@
 //  Created by Alexey Efimov on 22.04.2024.
 //
 
-import Observation
+import Foundation
 
-@Observable
-final class LoginViewViewModel {
+final class LoginViewViewModel: ObservableObject {
     var name = ""
-    var isLoggedIn = false
+    @Published var isLoggedIn = false
 }

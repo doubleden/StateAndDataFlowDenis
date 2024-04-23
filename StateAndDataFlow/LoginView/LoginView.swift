@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Bindable var loginViewVM: LoginViewViewModel
+    @EnvironmentObject private var loginViewVM: LoginViewViewModel
     
     var body: some View {
         VStack {
@@ -28,5 +28,6 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(loginViewVM: LoginViewViewModel())
+    LoginView()
+        .environmentObject(LoginViewViewModel())
 }

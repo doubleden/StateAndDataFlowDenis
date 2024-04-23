@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(ContentViewViewModel.self) private var contentViewVM
-    @Environment(LoginViewViewModel.self) private var loginViewVM
+    @EnvironmentObject private var loginViewVM: LoginViewViewModel
     
     var body: some View {
         VStack {
@@ -34,7 +34,7 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environment(ContentViewViewModel())
-        .environment(LoginViewViewModel())
+        .environmentObject(LoginViewViewModel())
 }
 
 struct ButtonView: View {
