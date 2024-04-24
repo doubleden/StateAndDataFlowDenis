@@ -24,17 +24,14 @@ struct LoginView: View {
                     .foregroundStyle(loginViewVM.isNameValid ? .green : .red)
             }
             
-            Button(action: login) {
+            Button(action: loginViewVM.login) {
                 Label("OK", systemImage: "checkmark.circle")
             }
             .disabled(loginViewVM.isNameValid ? false : true)
         }
         .padding()
-    }
-    
-    private func login() {
-        if !loginViewVM.name.isEmpty {
-            loginViewVM.isLoggedIn.toggle()
+        .onAppear {
+            loginViewVM.fetchUser()
         }
     }
 }

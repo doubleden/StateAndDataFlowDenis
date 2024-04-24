@@ -55,17 +55,11 @@ struct logoutButtonView: View {
     @EnvironmentObject private var loginViewVM: LoginViewViewModel
     
     var body: some View {
-        Button(action: logout, label: {
+        Button(action: loginViewVM.logout, label: {
             Text("LogOut")
                 .buttonFont()
         })
         .bordered(background: .blue)
-    }
-    
-    private func logout() {
-        loginViewVM.name = ""
-        loginViewVM.countLetters()
-        loginViewVM.isLoggedIn.toggle()
     }
 }
 
