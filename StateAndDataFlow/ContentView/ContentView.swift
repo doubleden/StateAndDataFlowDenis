@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(ContentViewViewModel.self) private var contentViewVM
     @EnvironmentObject private var loginViewVM: LoginViewViewModel
+    private let contentViewVM = ContentViewViewModel()
 
     var body: some View {
         VStack {
-            Text("Hi, \(loginViewVM.name)")
+            Text("Hi, \(loginViewVM.user.name)")
                 .font(.title)
                 .padding(.top, 100)
             
@@ -35,12 +35,11 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environment(ContentViewViewModel())
         .environmentObject(LoginViewViewModel())
 }
 
 struct startButtonView: View {
-    @Environment(ContentViewViewModel.self) private var contentViewVM
+    private let contentViewVM = ContentViewViewModel()
     
     var body: some View {
         Button(action: contentViewVM.startTimer) {

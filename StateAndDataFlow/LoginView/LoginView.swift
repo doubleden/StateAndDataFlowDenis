@@ -13,26 +13,20 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack(spacing: 10) {
-                TextField("Enter your name...", text: $loginViewVM.name)
+                TextField("Enter your name...", text: $loginViewVM.user.name)
                     .multilineTextAlignment(.center)
-                    .onChange(of: loginViewVM.name) { _, _ in
-                        loginViewVM.countLetters()
-                    }
                     .autocorrectionDisabled()
                     
-                Text(loginViewVM.counter.formatted())
+                Text(loginViewVM.nameLettersCount)
                     .foregroundStyle(loginViewVM.isNameValid ? .green : .red)
             }
             
             Button(action: loginViewVM.login) {
                 Label("OK", systemImage: "checkmark.circle")
             }
-            .disabled(loginViewVM.isNameValid ? false : true)
+            .disabled(!loginViewVM.isNameValid)
         }
         .padding()
-        .onAppear {
-            loginViewVM.fetchUser()
-        }
     }
 }
 

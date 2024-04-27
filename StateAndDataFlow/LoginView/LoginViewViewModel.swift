@@ -10,7 +10,7 @@ import Foundation
 final class LoginViewViewModel: ObservableObject {
     @Published var user: User
     
-    var isNameValide: Bool {
+    var isNameValid: Bool {
         user.name.count >= 3
     }
     
@@ -20,7 +20,7 @@ final class LoginViewViewModel: ObservableObject {
     
     private let storageManager = StorageManager.shared
     
-    init(user: User) {
+    init(user: User = User()) {
         self.user = user
     }
     
