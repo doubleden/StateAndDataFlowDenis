@@ -47,7 +47,6 @@ struct ContentView: View {
 }
 
 struct buttonView: View {
-    private let contentViewVM = ContentViewViewModel()
     let color: Color
     let text: String
     let action: () -> Void
