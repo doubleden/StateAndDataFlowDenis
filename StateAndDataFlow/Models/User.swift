@@ -5,7 +5,7 @@
 //  Created by Denis Denisov on 23/4/24.
 //
 
-struct User {
-    let username: String
-    let isLoggedIn : Bool
+struct User: Codable {
+    var name = ""
+    var isLoggedIn = false
 }
