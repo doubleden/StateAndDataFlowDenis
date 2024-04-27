@@ -23,11 +23,19 @@ struct ContentView: View {
                 
             Spacer()
             
-            startButtonView()
+            buttonView(
+                color: .red,
+                text: contentViewVM.buttonTitle,
+                action: contentViewVM.startTimer
+            )
             
             Spacer()
             
-            logoutButtonView()
+            buttonView(
+                color: .blue,
+                text: "LogOut",
+                action: loginViewVM.logout
+            )
         }
         .padding()
     }
@@ -38,38 +46,25 @@ struct ContentView: View {
         .environmentObject(LoginViewViewModel())
 }
 
-struct startButtonView: View {
+struct buttonView: View {
     private let contentViewVM = ContentViewViewModel()
+    let color: Color
+    let text: String
+    let action: () -> Void
     
     var body: some View {
-        Button(action: contentViewVM.startTimer) {
-            Text(contentViewVM.buttonTitle)
-                .buttonFont()
+        Button(action: action) {
+            Text(text)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundStyle(.white)
         }
-        .bordered(background: .red)
-    }
-}
-
-struct logoutButtonView: View {
-    @EnvironmentObject private var loginViewVM: LoginViewViewModel
-    
-    var body: some View {
-        Button(action: loginViewVM.logout, label: {
-            Text("LogOut")
-                .buttonFont()
-        })
-        .bordered(background: .blue)
-    }
-}
-
-private extension Text {
-    func buttonFont() -> some View {
-        modifier(FontViewModifier())
-    }
-}
-
-private extension Button {
-    func bordered(background: Color) -> some View {
-        modifier(BorderedViewModifier(color: background))
+        .frame(width: 200, height: 60)
+        .background(color)
+        .clipShape(.rect(cornerRadius: 20))
+        .overlay (
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(.black, lineWidth: 4)
+        )
     }
 }
