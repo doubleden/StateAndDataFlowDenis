@@ -8,42 +8,30 @@
 import Foundation
 
 final class LoginViewViewModel: ObservableObject {
-    @Published var name = ""
-    @Published var counter = 0
-    @Published var isLoggedIn = false
-    @Published var isNameValid = false
+    @Published var user: User
+    
+    var isNameValide: Bool {
+        user.name.count >= 3
+    }
+    
+    var nameLettersCount: String {
+        user.name.count.formatted()
+    }
     
     private let storageManager = StorageManager.shared
     
-    func fetchUser() {
-        let user = storageManager.read()
-        name = user.username
-        isLoggedIn = user.isLoggedIn
+    init(user: User) {
+        self.user = user
     }
     
     func login() {
-        isLoggedIn = true
-        storageManager.create(User(username: name, isLoggedIn: true))
+        user.isLoggedIn.toggle()
+        storageManager.create(user)
     }
     
     func logout() {
-        isLoggedIn = false
-        name = ""
-        counter = 0
-        isNameValid = false
+        user.name = ""
+        user.isLoggedIn.toggle()
         storageManager.delete()
-    }
-    
-    func countLetters() {
-        counter = name.count
-        validateName()
-    }
-    
-    private func validateName() {
-        if name.count >= 3 {
-            isNameValid = true
-        } else {
-            isNameValid = false
-        }
     }
 }
